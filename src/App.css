@@ -40,3 +40,21 @@
 .read-the-docs {
   color: #888;
 }
+/* Global layout styles */
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+}
+
+/* Basic header and footer styling */
+header,
+footer {
+  background-color: #1e293b;
+  color: white;
+  padding: 1rem;
+}
+
+/* Main content spacing */
+main {
+  padding: 1.5rem;
+}
