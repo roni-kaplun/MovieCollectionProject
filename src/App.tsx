@@ -1,21 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import MovieList from "./Components/movie-list/MovieList"
-
-const Movies: {title: string; coverUrl: string;}[] = [
-    {title: "Movie", coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdna.artstation.com%2Fp%2Fassets%2Fimages%2Fimages%2F063%2F096%2F684%2Flarge%2Fwilliam-j-harris-oppenheimer-movie-poster-2023.jpg%3F1684720979&f=1&nofb=1&ipt=efc2e615723772e61bd3b9e68834b1be0813d1b659387f85743fdff82e9323df"},
-    {title: "Movie", coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdna.artstation.com%2Fp%2Fassets%2Fimages%2Fimages%2F063%2F096%2F684%2Flarge%2Fwilliam-j-harris-oppenheimer-movie-poster-2023.jpg%3F1684720979&f=1&nofb=1&ipt=efc2e615723772e61bd3b9e68834b1be0813d1b659387f85743fdff82e9323df"},
-    {title: "Movie", coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdna.artstation.com%2Fp%2Fassets%2Fimages%2Fimages%2F063%2F096%2F684%2Flarge%2Fwilliam-j-harris-oppenheimer-movie-poster-2023.jpg%3F1684720979&f=1&nofb=1&ipt=efc2e615723772e61bd3b9e68834b1be0813d1b659387f85743fdff82e9323df"},
-    {title: "Movie", coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdna.artstation.com%2Fp%2Fassets%2Fimages%2Fimages%2F063%2F096%2F684%2Flarge%2Fwilliam-j-harris-oppenheimer-movie-poster-2023.jpg%3F1684720979&f=1&nofb=1&ipt=efc2e615723772e61bd3b9e68834b1be0813d1b659387f85743fdff82e9323df"},
-    {title: "Movie", coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdna.artstation.com%2Fp%2Fassets%2Fimages%2Fimages%2F063%2F096%2F684%2Flarge%2Fwilliam-j-harris-oppenheimer-movie-poster-2023.jpg%3F1684720979&f=1&nofb=1&ipt=efc2e615723772e61bd3b9e68834b1be0813d1b659387f85743fdff82e9323df"},
-];
+import SearchPanel from "./components/search-panel/SearchPanel";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
+    <div>
+      <h1>Movie Collection</h1>
+      <SearchPanel />
+    </div>
+  );
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -42,4 +33,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
