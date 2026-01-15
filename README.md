@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Project Team
 
 Our project consists of Roni Kaplun, Xander Burnett, and Hrithik Pala
@@ -15,6 +16,8 @@ As a critic, I want to able to write reviews for movies and compare my 5 star ra
 
 
 =======
+=======
+>>>>>>> 4e2206ad28b7ddf38ab402913981dd2061183ae8
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -88,4 +91,7 @@ export default defineConfig([
   },
 ])
 ```
+<<<<<<< HEAD
+>>>>>>> 4e2206ad28b7ddf38ab402913981dd2061183ae8
+=======
 >>>>>>> 4e2206ad28b7ddf38ab402913981dd2061183ae8
