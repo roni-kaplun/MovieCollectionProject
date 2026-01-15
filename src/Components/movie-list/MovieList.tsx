@@ -1,3 +1,5 @@
+import "./MovieList.css";
+
 function MovieList({movies}: {movies: {
     title: string;
     coverUrl: string;
