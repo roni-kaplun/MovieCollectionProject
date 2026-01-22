@@ -7,7 +7,7 @@ function MovieList({movies}: {movies: {
     return (
         <section className="movie-list">
             {movies.map(movie => <figure>
-                <img src={movie.coverUrl}></img> 
+                <img src={movie.coverUrl} alt="Movie Cover"></img> 
                 <figcaption>{movie.title}</figcaption> 
             </figure>)}
         </section>
