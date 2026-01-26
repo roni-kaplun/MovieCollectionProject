@@ -1,0 +1,17 @@
+import "./MovieList.css";
+
+function MovieList({movies}: {movies: {
+    title: string;
+    coverUrl: string;
+}[]}) {
+    return (
+        <section className="movie-list">
+            {movies.map(movie => <figure>
+                <img src={movie.coverUrl} alt="Url for movie cover"></img> 
+                <figcaption>{movie.title}</figcaption> 
+            </figure>)}
+        </section>
+    );
+};
+
+export default MovieList;

@@ -1,0 +1,14 @@
+.movie-card {
+  width: 180px;
+  text-align: center;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.movie-card figcaption {
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
