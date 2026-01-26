@@ -1,6 +1,7 @@
 import { useState } from "react";
-import MovieList from "./Components/movie-list/MovieList";
+import MovieList from "./components/movie-list/MovieList";
 import SearchPanel from "./components/search-panel/SearchPanel";
+import TrendingTab from "./components/trending-movies/TrendingMovies";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 
@@ -28,6 +29,7 @@ function App() {
         <h1>Movie Collection</h1>
         <SearchPanel />
         <MovieList movies={Movies} />
+        <TrendingTab/>
       </div>
 
       <div>
