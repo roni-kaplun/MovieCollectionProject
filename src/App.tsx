@@ -1,48 +1,8 @@
-import { useState } from "react";
-import MovieList from "./components/movie-list/MovieList";
-import NavigationBar from "./components/navigation-bar/NavigationBar";
-import SearchPanel from "./components/search-panel/SearchPanel";
-import TrendingTab from "./components/trending-movies/TrendingMovies";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Link, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import MoviesPage from "./pages/MoviesPage";
 
-const Movies: {
-    coverUrl: string;
-    title: string;
-}[] = [
-    {coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df", title: "Avengers Endgame"},
-    {coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df", title: "Avengers Endgame"},
-    {coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df", title: "Avengers Endgame"},
-    {coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df", title: "Avengers Endgame"},
-    {coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df", title: "Avengers Endgame"},
-    {coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df", title: "Avengers Endgame"},
-    {coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df", title: "Avengers Endgame"},
-    {coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df", title: "Avengers Endgame"},
-    {coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df", title: "Avengers Endgame"}
-];
-
-const Links: {
-    label: string;
-    url: string;
-}[] = [
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""},
-    {label: "Link 1", url: ""}
-];
-
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
     <>
         <NavigationBar links={Links} />
@@ -76,5 +36,3 @@ function App() {
     </>
   );
 }
-
-export default App;
