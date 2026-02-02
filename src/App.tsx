@@ -1,15 +1,18 @@
+import FavouritesPage from "./pages/FavouritesPage";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { useState } from "react";
 
 import HomePage from "./pages/HomePage";
 import MoviesPage from "./pages/MoviesPage";
-import NavigationBar from "./components/navigation-bar/NavigationBar";
+import NavigationBar from "./Components/navigation-bar/NavigationBar";
 
 export default function App() {
   const Links = [
   { label: "Home", url: "/" },
   { label: "Movies", url: "/movies" },
+  { label: "Favourites", url: "/favorites" },
 ];
+
 
   const [count, setCount] = useState(0);
 
@@ -19,6 +22,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
+        <Route path="/favorites" element={<FavouritesPage movies={[]} />} />
+
       </Routes>
 
       <div className="card">
