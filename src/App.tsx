@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import HomePage from "./pages/HomePage";
 import MoviesPage from "./pages/MoviesPage";
-import NavigationBar from "./Components/navigation-bar/NavigationBar";
+import NavigationBar from "./components/navigation-bar/NavigationBar";
 
 export default function App() {
   const Links = [
