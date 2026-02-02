@@ -1,7 +1,7 @@
-import MovieList from "../Components/movie-list/MovieList";
-import SearchPanel from "../Components/search-panel/SearchPanel";
+import MovieList from "../components/movie-list/MovieList";
+import SearchPanel from "../components/search-panel/SearchPanel";
 
-const movies = [
+export const movies = [
   {
     title: "Inception",
     coverUrl: "https://via.placeholder.com/150",
