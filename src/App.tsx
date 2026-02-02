@@ -1,31 +1,31 @@
-import { Link, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
+
 import HomePage from "./pages/HomePage";
 import MoviesPage from "./pages/MoviesPage";
 import NavigationBar from "./components/navigation-bar/NavigationBar";
-import SearchPanel from "./components/search-panel/SearchPanel";
-import MovieList from "./components/movie-list/MovieList";
-import TrendingTab from "./components/trending-movies/TrendingMovies";
-import { movies } from "./pages/MoviesPage";
-import { useState } from "react";
-
 
 export default function App() {
-  const [count, setCount] = useState(0);
-  return (
-    <>
+  const Links = [
+  { label: "Home", url: "/" },
+  { label: "Movies", url: "/movies" },
+];
 
-      <div>
-        <h1>Movie Collection</h1>
-        <SearchPanel />
-        <MovieList movies={movies} />
-        <TrendingTab />
-      </div>
+  const [count, setCount] = useState(0);
+
+  return (<>
+      <NavigationBar links={Links}/>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movies" element={<MoviesPage />} />
+      </Routes>
 
       <div className="card">
         <button onClick={() => setCount(count + 1)}>
           count is {count}
         </button>
       </div>
-    </>
+      </>
   );
 }
