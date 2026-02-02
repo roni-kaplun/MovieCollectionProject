@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import FavouritesForm from "../Components/favourites-form/FavouritesForm";
+import FavouritesForm from "../components/favourites-form/FavouritesForm";
 
 type Movie = {
   coverUrl: string;
