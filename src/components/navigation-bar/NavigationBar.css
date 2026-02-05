@@ -1,24 +1,25 @@
 nav {
-    display: flex;
-    width: 100vw;
-    height: auto;
-    box-sizing: border-box;
-
-    padding: 0.0;
-    margin: 0;
-    margin-bottom: 15px;
-
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  width: 100vw;
+  padding: 0;
+  margin-bottom: 15px;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: #1a1a1a; 
+  position: relative;
+  z-index: 10;
 }
 
 nav a {
-    padding: 15px;
-    color: white;
-    margin: 0;
+  padding: 15px;
+  color: white;
+  margin: 0;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s;
 }
 
 nav a:hover {
-    color: #155;
-    background-color: #f2c302;
+  color: #000;         
+  background-color: #f2c302; 
 }

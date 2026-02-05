@@ -1,21 +1,22 @@
 import "./NavigationBar.css";
+import { Link } from "react-router-dom";
 
-function NavigationBar({links}: {links: {
-    label: string;
-    url: string;
-}[]}) {
-    return (
-        <nav>
-            {
-                links.map(
-                    (
-                        link: {label: string, url: string}, 
-                        index: number
-                    ) => <a key={index} href={link.url}>{link.label}</a>
-                )
-            }
-        </nav>
-    );
-};
+interface LinkItem {
+  label: string;
+  url: string;
+}
+
+function NavigationBar({ links }: { links: LinkItem[] }) {
+  return (
+    <nav>
+      {links.map((link, index) => (
+        // Use a CSS class for spacing/styling
+        <Link key={index} to={link.url} className="nav-link">
+          {link.label}
+        </Link>
+      ))}
+    </nav>
+  );
+}
 
 export default NavigationBar;
