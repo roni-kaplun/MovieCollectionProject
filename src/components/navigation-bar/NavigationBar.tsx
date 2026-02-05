@@ -1,18 +1,17 @@
 import "./NavigationBar.css";
 import { Link } from "react-router-dom";
 
-function NavigationBar({
-  links,
-}: {
-  links: {
-    label: string;
-    url: string;
-  }[];
-}) {
+interface LinkItem {
+  label: string;
+  url: string;
+}
+
+function NavigationBar({ links }: { links: LinkItem[] }) {
   return (
     <nav>
       {links.map((link, index) => (
-        <Link key={index} to={link.url}>
+        // Use a CSS class for spacing/styling
+        <Link key={index} to={link.url} className="nav-link">
           {link.label}
         </Link>
       ))}
