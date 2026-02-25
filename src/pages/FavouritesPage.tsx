@@ -37,8 +37,9 @@ export default function FavouritesPage() {
       return;
     }
 
-    if (favourites.includes(found.id)) {
-      setMessage("Already in favourites.");
+    const check = movieService.canAddToFavourites(favourites, found.id);
+    if (!check.ok) {
+      setMessage(check.message || "Cannot add favourite.");
       return;
     }
 
