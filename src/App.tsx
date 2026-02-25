@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import HomePage from "./pages/HomePage";
 import MoviesPage from "./pages/MoviesPage";
-import NavigationBar from "./components/navigation-bar/NavigationBar";
+import NavigationBar from "./Components/navigation-bar/NavigationBar";
 import FavouritesPage from "./pages/FavouritesPage";
 
 const Movies: { coverUrl: string; title: string }[] = [
