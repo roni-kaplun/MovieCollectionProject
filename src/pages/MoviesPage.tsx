@@ -19,20 +19,39 @@ import { useState } from "react";
 import MovieList from "../Components/movie-list/MovieList";
 import SearchPanel from "../Components/search-panel/SearchPanel";
 import { useMovies } from "../hooks/useMovies";
+import { movieService } from "../services/movieService";
 
-
- 
 export default function MoviesPage() {
-  const { movies } = useMovies();
+  const { movies, refresh } = useMovies();
 
   const [query, setQuery] = useState("");
+
   const filtered = movies.filter((m) =>
     m.title.toLowerCase().includes(query.trim().toLowerCase())
   );
 
+  function addTestMovie() {
+    const result = movieService.addMovie({
+      id: "m" + Date.now(),
+      title: "Test Movie " + Math.floor(Math.random() * 100),
+      year: 2024,
+      coverUrl: "https://via.placeholder.com/150?text=New+Movie",
+    });
+
+    if (result.ok) {
+      refresh(); // reload movies from repository
+    } else {
+      alert(result.message);
+    }
+  }
+
   return (
     <div>
       <h1>Movies</h1>
+
+      <button onClick={addTestMovie}>
+        Add Test Movie
+      </button>
 
       <SearchPanel
         query={query}
