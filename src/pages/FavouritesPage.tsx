@@ -1,77 +1,90 @@
+/**
+ * Sprint 3 - Architecture Usage
+ *
+ * This component follows the hook-service-repository structure.
+ *
+ * The useMovies() hook handles presentation logic by loading movie data
+ * into React state and keeping that state separate from the UI.
+ *
+ * The movieService is used here for business logic, such as checking
+ * whether a movie exists before adding it to favourites.
+ *
+ * The movieService calls the movieRepository, which is responsible
+ * for data access (currently using test data).
+ *
+ * This keeps presentation logic, business logic, and data access
+ * separated as required in this sprint.
+ */
 import { useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
-import FavouritesForm from "../components/favourites-form/FavouritesForm";
+import { useMovies } from "../hooks/useMovies";
+import { movieService } from "../services/movieService";
 
-type Movie = {
-  coverUrl: string;
-  title: string;
-};
 
-type Props = {
-  movies: Movie[];
-};
+export default function FavouritesPage() {
+  const { movies } = useMovies();
 
-export default function FavouritesPage({ movies }: Props) {
-  const [favourites, setFavourites] = useState<Movie[]>([]);
+  const [favourites, setFavourites] = useState<string[]>([]);
   const [input, setInput] = useState("");
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState<string>("");
 
-  function handleAddFavourite(e: FormEvent) {
+  function addFavourite(e: FormEvent) {
     e.preventDefault();
-    setError("");
+    setMessage("");
 
-    if (!input.trim()) {
-      setError("Please enter a movie title.");
+    const found = movieService.findByTitle(input);
+    if (!found) {
+      setMessage("Movie not found (exact title match).");
       return;
     }
 
-    const movie = movies.find(
-      (m) => m.title.toLowerCase() === input.toLowerCase()
-    );
-
-    if (!movie) {
-      setError("Movie not found.");
+    const check = movieService.canAddToFavourites(favourites, found.id);
+    if (!check.ok) {
+      setMessage(check.message || "Cannot add favourite.");
       return;
     }
 
-    if (favourites.some((f) => f.title === movie.title)) {
-      setError("Movie already in favourites.");
-      return;
-    }
-
-    setFavourites([...favourites, movie]);
+    setFavourites([found.id, ...favourites]);
     setInput("");
+    setMessage("Added.");
   }
 
-  function handleRemoveFavourite(title: string) {
-    setFavourites(favourites.filter((m) => m.title !== title));
-  }
+  const favouriteMovies = movies.filter((m) => favourites.includes(m.id));
 
   return (
     <div>
-    <h1>Favourites</h1>
-    <p>
-     <Link to="/">← Back to Home</Link>
-    </p>
-      <FavouritesForm
-        input={input}
-        setInput={setInput}
-        error={error}
-        setError={setError}
-        onAdd={handleAddFavourite}
-/>
+      <h1>Favourites</h1>
 
+      <form onSubmit={addFavourite}>
+        <label htmlFor="favInput">Add by exact title</label>
+        <input
+          id="favInput"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button type="submit">Add</button>
+      </form>
 
-      <ul>
-        {favourites.map((movie) => (
-          <li key={movie.title}>
-            {movie.title}
-            <button onClick={() => handleRemoveFavourite(movie.title)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
+      {message && <p>{message}</p>}
+
+      <h2>Your favourites</h2>
+      {favouriteMovies.length === 0 ? (
+        <p>No favourites yet.</p>
+      ) : (
+        <ul>
+          {favouriteMovies.map((m) => (
+            <li key={m.id}>
+              {m.title} ({m.year})
+              <button
+                type="button"
+                onClick={() => setFavourites(favourites.filter((id) => id !== m.id))}
+                style={{ marginLeft: 8 }}
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
