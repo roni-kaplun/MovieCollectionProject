@@ -1,3 +1,4 @@
+import { MovieCards } from "../components/movie-card/MovieCards";
 import MovieList from "../components/movie-list/MovieList";
 import SearchPanel from "../components/search-panel/SearchPanel";
 
@@ -18,6 +19,7 @@ export default function MoviesPage() {
       <h1>Movies</h1>
       <SearchPanel />
       <MovieList movies={movies} />
+      <MovieCards/>
     </div>
   );
 }
