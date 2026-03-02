@@ -3,31 +3,26 @@
  *
  * This component follows the hook-service-repository structure.
  *
- * The useMovies() hook handles presentation logic by loading movie data
- * into React state and keeping that state separate from the UI.
+ * useMovies() handles presentation logic by loading movie data.
  *
- * The movieService is used here for business logic, such as checking
- * whether a movie exists before adding it to favourites.
+ * movieService contains business logic (like validating movie titles).
  *
- * The movieService calls the movieRepository, which is responsible
- * for data access (currently using test data).
- *
- * This keeps presentation logic, business logic, and data access
- * separated as required in this sprint.
+ * Favourites are shared UI state using Context instead of prop drilling.
  */
+
 import { useState, type FormEvent } from "react";
 import { useMovies } from "../hooks/useMovies";
 import { movieService } from "../services/movieService";
-
+import { useFavourites } from "../context/FavouritesContext";
 
 export default function FavouritesPage() {
   const { movies } = useMovies();
+  const { favouriteIds, addFavourite, removeFavourite } = useFavourites();
 
-  const [favourites, setFavourites] = useState<string[]>([]);
   const [input, setInput] = useState("");
   const [message, setMessage] = useState<string>("");
 
-  function addFavourite(e: FormEvent) {
+  function handleAddByTitle(e: FormEvent) {
     e.preventDefault();
     setMessage("");
 
@@ -37,24 +32,20 @@ export default function FavouritesPage() {
       return;
     }
 
-    const check = movieService.canAddToFavourites(favourites, found.id);
-    if (!check.ok) {
-      setMessage(check.message || "Cannot add favourite.");
-      return;
-    }
-
-    setFavourites([found.id, ...favourites]);
+    addFavourite(found.id);
     setInput("");
     setMessage("Added.");
   }
 
-  const favouriteMovies = movies.filter((m) => favourites.includes(m.id));
+  const favouriteMovies = movies.filter((m) =>
+    favouriteIds.includes(m.id)
+  );
 
   return (
     <div>
       <h1>Favourites</h1>
 
-      <form onSubmit={addFavourite}>
+      <form onSubmit={handleAddByTitle}>
         <label htmlFor="favInput">Add by exact title</label>
         <input
           id="favInput"
@@ -67,6 +58,7 @@ export default function FavouritesPage() {
       {message && <p>{message}</p>}
 
       <h2>Your favourites</h2>
+
       {favouriteMovies.length === 0 ? (
         <p>No favourites yet.</p>
       ) : (
@@ -76,7 +68,7 @@ export default function FavouritesPage() {
               {m.title} ({m.year})
               <button
                 type="button"
-                onClick={() => setFavourites(favourites.filter((id) => id !== m.id))}
+                onClick={() => removeFavourite(m.id)}
                 style={{ marginLeft: 8 }}
               >
                 Remove

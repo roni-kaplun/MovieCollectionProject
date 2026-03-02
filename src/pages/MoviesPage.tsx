@@ -1,40 +1,46 @@
+import { useState } from "react";
+import { useMovies } from "../hooks/useMovies";
+import { movieService } from "../services/movieService";
+import SearchPanel from "../Components/search-panel/SearchPanel";
+import { useFavourites } from "../context/FavouritesContext";
+
 /**
  * Sprint 3 - Architecture Usage
  *
  * This page uses the hook-service-repository structure.
  *
- * The useMovies() hook handles presentation logic by loading
- * the movie data into state for this page.
+ * useMovies -> presentation logic
+ * movieService -> business logic
+ * repository -> data access
  *
- * The hook calls movieService, which contains the business logic
- * for working with movies.
- *
- * The service then uses movieRepository for data access
- * (right now using test data).
- *
- * This keeps business logic and presentation logic separate
- * instead of putting everything in the component.
+ * Favourites are shared UI state using Context.
  */
-import { useState } from "react";
-import { useMovies } from "../hooks/useMovies";
-import { movieService } from "../services/movieService";
-import MovieList from "../components/movie-list/MovieList";
-import SearchPanel from "../components/search-panel/SearchPanel";
-
 
 export default function MoviesPage() {
-  const movies = [
-  {
-    id: "1",
-    title: "Inception",
-    coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df",
-  },
-  {
-    id: "2",
-    title: "Interstellar",
-    coverUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F81%252BNup8-8NL._SL1500_.jpg&f=1&nofb=1&ipt=f93402e2b2791622fd05a4f9a05a8adfd94dad8f85a348ebdd400e2d99af99df",
-  },
-];
+  const { movies, refresh } = useMovies();
+  const { addFavourite, removeFavourite, isFavourite } = useFavourites();
+
+  const [query, setQuery] = useState("");
+
+  const filtered = movies.filter((m) =>
+    m.title.toLowerCase().includes(query.trim().toLowerCase())
+  );
+
+  function addTestMovie() {
+    const result = movieService.addMovie({
+      id: "m" + Date.now(),
+      title: "Test Movie " + Math.floor(Math.random() * 100),
+      year: 2024,
+      coverUrl: "https://via.placeholder.com/150?text=New+Movie",
+    });
+
+    if (result.ok) {
+      refresh();
+    } else {
+      alert(result.message || "Could not add movie.");
+    }
+  }
+
   return (
     <div>
       <h1>Movies</h1>
@@ -50,7 +56,22 @@ export default function MoviesPage() {
         totalCount={movies.length}
       />
 
-      <MovieList movies={filtered} />
+      <ul>
+        {filtered.map((m) => (
+          <li key={m.id} style={{ marginBottom: 8 }}>
+            {m.title} ({m.year}){" "}
+            {isFavourite(m.id) ? (
+              <button onClick={() => removeFavourite(m.id)}>
+                Remove Favourite
+              </button>
+            ) : (
+              <button onClick={() => addFavourite(m.id)}>
+                Add Favourite
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
